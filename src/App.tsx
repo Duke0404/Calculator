@@ -18,10 +18,16 @@ const App = () => {
 		<>
 			<Topbar />
 
-			<div>
+			<main
+				className="
+					flex
+					flex-col
+					items-center
+				"
+			>
 				<Display />
 				<ButtonCluster />
-			</div>
+			</main>
 		</>
 	)
 }
