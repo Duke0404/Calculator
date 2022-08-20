@@ -10,10 +10,15 @@ import ButtonCluster from "./components/ButtonCluster"
 // Import Topbar
 import Topbar from "./components/Topbar"
 
+// Enumerations
+// Enum for the different operations of the calculator
+import { operation } from "./components/ButtonCluster"
+
 const App = () => {
 	// States
-	const [display, setDisplay] = useState(0)
-	
+	// State to hold the result of the calculation
+	const [display, setDisplay] = useState("")
+
 	return (
 		<>
 			<Topbar />
@@ -22,11 +27,14 @@ const App = () => {
 				className="
 					flex
 					flex-col
-					items-center
+					grow
 				"
 			>
 				<Display />
-				<ButtonCluster />
+				<ButtonCluster
+					display={display}
+					setDisplay={setDisplay}
+				/>
 			</main>
 		</>
 	)

@@ -6,4 +6,10 @@
     body {
         @apply bg-background-1;
     }
+
+    #root {
+        @apply h-screen;
+        @apply flex;
+        @apply flex-col;
+    }
 }
