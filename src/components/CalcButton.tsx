@@ -10,7 +10,6 @@ export enum buttonType {
 	delete,
 	equals
 }
-import { clear } from "console"
 // Enum for the different operations of the calculator
 import { operation } from "./ButtonCluster"
 
@@ -320,6 +319,7 @@ const CalcButton = (props: calcButtonProps) => {
 				portrait:sm:py-5
 				portrait:md:py-16
 				landscape:px-2
+				landscape:sm:px-5
 				landscape:lg:px-16
 				h-full
 				shadow-lg
