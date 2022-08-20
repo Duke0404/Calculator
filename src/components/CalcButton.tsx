@@ -120,6 +120,8 @@ const CalcButton = (props: calcButtonProps) => {
 
 	// Function to handle click event of the button
 	const handleClick = () => {
+		console.log(props.children)
+
 		// Check the type of the button
 		switch (props.type) {
 			// If the button is a number

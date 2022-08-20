@@ -1,6 +1,6 @@
 // React stuff
-// import useState
-import { useState } from "react"
+// import useState & useEffect
+import { useState, useEffect } from "react"
 
 // Components
 // Import CalcButton
@@ -21,7 +21,6 @@ import { buttonType } from "./CalcButton"
 // Interfaces
 // Props of ButtonCluster
 interface ButtonClusterProps {
-	display: string
 	setDisplay: (display: string) => void
 }
 
@@ -43,6 +42,32 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 	const [intSecond, setIntSecond] = useState(true)
 	// State to hold the current operation
 	const [currentOperation, setCurrentOperation] = useState(operation.none)
+
+	// Get the display version of the first operation
+	let operationDisplay = ""
+	switch (currentOperation) {
+		case operation.add:
+			operationDisplay = "+"
+			break
+		
+		case operation.subtract:
+			operationDisplay = "-"
+			break
+		
+		case operation.multiply:
+			operationDisplay = "*"
+			break
+		
+		case operation.divide:
+			operationDisplay = "/"
+			break
+	}
+
+	// Effects
+	// Effect to drive the display
+	useEffect(() => {
+		props.setDisplay(`${firstOperand ? firstOperand : ""} ${currentOperation ? operationDisplay : ""} ${secondOperand ? secondOperand : ""}`)
+	}, [firstOperand, secondOperand, currentOperation, signPositive])
 
 	return (
 		<div

@@ -30,11 +30,8 @@ const App = () => {
 					grow
 				"
 			>
-				<Display />
-				<ButtonCluster
-					display={display}
-					setDisplay={setDisplay}
-				/>
+				<Display display={display} />
+				<ButtonCluster setDisplay={setDisplay} />
 			</main>
 		</>
 	)

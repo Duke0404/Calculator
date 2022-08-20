@@ -1,11 +1,18 @@
-const Display = () => (
+// Interfaces
+// Props of Display
+interface DisplayProps {
+	display: string
+}
+
+const Display = (props: DisplayProps) => (
 	<div
 		className="
 			bg-black
+			text-white
 			grow
 		"
 	>
-		<h1>Display</h1>
+		{props.display}
 	</div>
 )
 
