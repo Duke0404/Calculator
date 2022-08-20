@@ -27,7 +27,7 @@ interface ButtonClusterProps {
 const ButtonCluster = (props: ButtonClusterProps) => {
 	// States
 	// State to hold first operand
-	const [firstOperand, setFirstOperand] = useState<number | undefined>(undefined)
+	const [firstOperand, setFirstOperand] = useState("")
 	// State to hold the sign of the first operand
 	const [signPositive, setSignPositive] = useState(true)
 	// State to hold the decimal point state of the first operand
@@ -35,7 +35,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 	// State to hold whether the first operand is an integer
 	const [intFirst, setIntFirst] = useState(true)
 	// State to hold second operand
-	const [secondOperand, setSecondOperand] = useState<number | undefined>(undefined)
+	const [secondOperand, setSecondOperand] = useState("")
 	// State to hold the decimal point state of the second operand
 	const [pointSecond, setPointSecond] = useState(false)
 	// State to hold whether the second operand is an integer
@@ -49,15 +49,15 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 		case operation.add:
 			operationDisplay = "+"
 			break
-		
+
 		case operation.subtract:
 			operationDisplay = "-"
 			break
-		
+
 		case operation.multiply:
 			operationDisplay = "*"
 			break
-		
+
 		case operation.divide:
 			operationDisplay = "/"
 			break
@@ -66,7 +66,11 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 	// Effects
 	// Effect to drive the display
 	useEffect(() => {
-		props.setDisplay(`${firstOperand ? firstOperand : ""} ${currentOperation ? operationDisplay : ""} ${secondOperand ? secondOperand : ""}`)
+		props.setDisplay(
+			`${signPositive ? " " : "-"}${firstOperand ? firstOperand : ""} ${
+				currentOperation ? operationDisplay : ""
+			} ${secondOperand ? secondOperand : ""}`
+		)
 	}, [firstOperand, secondOperand, currentOperation, signPositive])
 
 	return (
