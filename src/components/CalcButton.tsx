@@ -314,11 +314,20 @@ const CalcButton = (props: calcButtonProps) => {
 				flex
 				items-center
 				justify-center
-				rounded-lg
-				${props.accent && "bg-black text-white"}
-				${props.accent2 && "bg-red-700"}
+				rounded-2xl
+				
+				text-2xl
+				py-8
+				shadow-lg
+				hover:shadow-xl
+				${
+					props.accent
+						? "bg-accent-prime text-white"
+						: props.accent2
+						? "bg-accent-sec text-white"
+						: "bg-background-1 hover:bg-background-2"
+				}
 			`}
-
 			onClick={() => handleClick()}
 		>
 			{props.children}
