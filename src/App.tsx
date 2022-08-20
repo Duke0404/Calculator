@@ -7,12 +7,6 @@ import { useState } from "react"
 import Display from "./components/Display"
 // Import ButtonCluster
 import ButtonCluster from "./components/ButtonCluster"
-// Import Topbar
-import Topbar from "./components/Topbar"
-
-// Enumerations
-// Enum for the different operations of the calculator
-import { operation } from "./components/ButtonCluster"
 
 const App = () => {
 	// States
@@ -20,20 +14,17 @@ const App = () => {
 	const [display, setDisplay] = useState("")
 
 	return (
-		<>
-			<Topbar />
-
-			<main
-				className="
-					flex
-					flex-col
-					grow
-				"
-			>
-				<Display display={display} />
-				<ButtonCluster setDisplay={setDisplay} />
-			</main>
-		</>
+		<main
+			className="
+				flex
+				flex-col
+				landscape:flex-row
+				grow
+			"
+		>
+			<Display display={display} />
+			<ButtonCluster setDisplay={setDisplay} />
+		</main>
 	)
 }
 

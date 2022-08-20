@@ -7,9 +7,9 @@ interface DisplayProps {
 const Display = (props: DisplayProps) => (
 	<div
 		className="
-			bg-black
-			text-white
 			grow
+			p-8
+			text-5xl
 		"
 	>
 		{props.display}

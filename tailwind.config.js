@@ -8,6 +8,7 @@ module.exports = {
 				"accent-sec": "#473e9e",
 				"background-1": "#fff",
 				"background-2": "#fff",
+				"background-3": "#e0c8ff",
 			}
 		}
 	},

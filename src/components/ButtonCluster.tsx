@@ -75,8 +75,14 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				grid
 				grid-cols-4
 				grid-rows-5
+				items-center
+				justify-center
 				gap-4
 				p-4
+				bg-background-3
+				rounded-t-3xl
+				landscape:rounded-3xl
+				landscape:m-4
 			"
 		>
 			<CalcButton
