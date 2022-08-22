@@ -119,7 +119,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 			</CalcButton>
 
 			<CalcButton
-				type={buttonType.operation}
+				type={buttonType.monoOperation}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
 				intFirst={intFirst}

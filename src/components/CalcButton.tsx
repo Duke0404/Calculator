@@ -169,6 +169,8 @@ const CalcButton = (props: calcButtonProps) => {
 						props.setCurrentOperation(operation.divide)
 						// Set the second operand to  100
 						props.setSecondOperand("100")
+						// Calculate the result
+						calculate()
 					}
 				}
 
