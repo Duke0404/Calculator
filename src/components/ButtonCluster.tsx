@@ -28,8 +28,6 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 	// States
 	// State to hold first operand
 	const [firstOperand, setFirstOperand] = useState("")
-	// State to hold the sign of the first operand
-	const [signPositive, setSignPositive] = useState(true)
 	// State to hold whether the first operand is an integer
 	const [intFirst, setIntFirst] = useState(true)
 	// State to hold second operand
@@ -63,11 +61,11 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 	// Effect to drive the display
 	useEffect(() => {
 		props.setDisplay(
-			`${signPositive ? " " : "-"}${firstOperand ? firstOperand : ""} ${
+			`${firstOperand ? firstOperand : ""} ${
 				currentOperation ? operationDisplay : ""
 			} ${secondOperand ? secondOperand : ""}`
 		)
-	}, [firstOperand, secondOperand, currentOperation, signPositive])
+	}, [firstOperand, secondOperand, currentOperation])
 
 	return (
 		<div
@@ -89,10 +87,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.clear}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -107,10 +103,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.signChange}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -125,10 +119,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.operation}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -143,10 +135,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.operation}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -162,10 +152,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -180,10 +168,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -198,10 +184,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -216,10 +200,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.operation}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -235,10 +217,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -253,10 +233,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -271,10 +249,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -289,10 +265,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.operation}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -308,10 +282,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -326,10 +298,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -344,10 +314,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -362,10 +330,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.operation}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -381,10 +347,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.number}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -399,10 +363,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.point}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -417,10 +379,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.delete}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}
@@ -435,10 +395,8 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				type={buttonType.equals}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
-				signPositive={signPositive}
 				intFirst={intFirst}
 				setIntFirst={setIntFirst}
-				setSignPositive={setSignPositive}
 				secondOperand={secondOperand}
 				setSecondOperand={setSecondOperand}
 				intSecond={intSecond}

@@ -22,8 +22,6 @@ interface calcButtonProps {
 	accent2?: boolean
 	firstOperand: string
 	setFirstOperand: (firstOperand: string) => void
-	signPositive: boolean
-	setSignPositive: (signPositive: boolean) => void
 	intFirst: boolean
 	setIntFirst: (intFirst: boolean) => void
 	secondOperand: string
@@ -41,6 +39,8 @@ const CalcButton = (props: calcButtonProps) => {
 		props.setFirstOperand("")
 		props.setSecondOperand("")
 		props.setCurrentOperation(operation.none)
+		props.setIntFirst(true)
+		props.setIntSecond(true)
 	}
 
 	// Function to calculate the result
@@ -50,35 +50,22 @@ const CalcButton = (props: calcButtonProps) => {
 			props.secondOperand !== "" &&
 			props.currentOperation !== operation.none
 		) {
-			// first operand with sign
-			const firstOperandWithSign = props.signPositive
-				? Number(props.firstOperand)
-				: -Number(props.firstOperand)
-
 			// Result
 			switch (props.currentOperation) {
 				case operation.add:
-					props.setFirstOperand(
-						String(firstOperandWithSign + Number(props.secondOperand))
-					)
+					props.setFirstOperand(`${+props.firstOperand + +props.secondOperand}`)
 					break
 
 				case operation.subtract:
-					props.setFirstOperand(
-						String(firstOperandWithSign - Number(props.secondOperand))
-					)
+					props.setFirstOperand(`${+props.firstOperand - +props.secondOperand}`)
 					break
 
 				case operation.multiply:
-					props.setFirstOperand(
-						String(firstOperandWithSign * Number(props.secondOperand))
-					)
+					props.setFirstOperand(`${+props.firstOperand * +props.secondOperand}`)
 					break
 
 				case operation.divide:
-					props.setFirstOperand(
-						String(firstOperandWithSign / Number(props.secondOperand))
-					)
+					props.setFirstOperand(`${+props.firstOperand / +props.secondOperand}`)
 					break
 			}
 
@@ -196,10 +183,23 @@ const CalcButton = (props: calcButtonProps) => {
 
 			// If the button is a sign change button
 			case buttonType.signChange:
-				// If  operation is undefined & the second operand is undefined
-				if (props.currentOperation === operation.none && props.secondOperand === "") {
-					// Set sign positive to the opposite of the sign positive
-					props.setSignPositive(!props.signPositive)
+				// If first operand is defined & operation is undefined & the second operand is undefined
+				if (
+					props.firstOperand !== "" &&
+					props.currentOperation === operation.none &&
+					props.secondOperand === ""
+				) {
+					// Check if the first operand is a negative number
+					if (props.firstOperand.charAt(0) === "-") {
+						// Remove the sign from the first operand
+						props.setFirstOperand(props.firstOperand.substring(1))
+					}
+
+					// Else if the first operand is a positive number
+					else {
+						// Add a sign to the first operand
+						props.setFirstOperand(`-${props.firstOperand}`)
+					}
 				}
 
 				break
@@ -298,7 +298,7 @@ const CalcButton = (props: calcButtonProps) => {
 					// Append a 0 to the second operand
 					props.setSecondOperand(`${props.secondOperand}0`)
 				}
-				
+
 				// Set the first operand to the result of the operation
 				calculate()
 				break
