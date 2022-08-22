@@ -202,6 +202,25 @@ const CalcButton = (props: calcButtonProps) => {
 					}
 				}
 
+				// If the first operand is defined and the operation is defined and the second operand is defined
+				else if (
+					props.firstOperand !== "" &&
+					props.currentOperation !== operation.none &&
+					props.secondOperand !== ""
+				) {
+					// Check if the second operand is a negative number
+					if (props.secondOperand.charAt(0) === "-") {
+						// Remove the sign from the second operand
+						props.setSecondOperand(props.secondOperand.substring(1))
+					}
+
+					// Else if the second operand is a positive number
+					else {
+						// Add a sign to the second operand
+						props.setSecondOperand(`-${props.secondOperand}`)
+					}
+				}
+
 				break
 
 			// If the button is a point button

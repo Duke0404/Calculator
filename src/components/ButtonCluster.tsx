@@ -49,7 +49,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 			break
 
 		case operation.multiply:
-			operationDisplay = "*"
+			operationDisplay = "x"
 			break
 
 		case operation.divide:
@@ -61,9 +61,9 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 	// Effect to drive the display
 	useEffect(() => {
 		props.setDisplay(
-			`${firstOperand ? firstOperand : ""} ${
-				currentOperation ? operationDisplay : ""
-			} ${secondOperand ? secondOperand : ""}`
+			`${firstOperand ? firstOperand : ""} ${currentOperation ? operationDisplay : ""} ${
+				secondOperand ? secondOperand : ""
+			}`
 		)
 	}, [firstOperand, secondOperand, currentOperation])
 
@@ -344,22 +344,6 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 			</CalcButton>
 
 			<CalcButton
-				type={buttonType.number}
-				firstOperand={firstOperand}
-				setFirstOperand={setFirstOperand}
-				intFirst={intFirst}
-				setIntFirst={setIntFirst}
-				secondOperand={secondOperand}
-				setSecondOperand={setSecondOperand}
-				intSecond={intSecond}
-				setIntSecond={setIntSecond}
-				currentOperation={currentOperation}
-				setCurrentOperation={setCurrentOperation}
-			>
-				0
-			</CalcButton>
-
-			<CalcButton
 				type={buttonType.point}
 				firstOperand={firstOperand}
 				setFirstOperand={setFirstOperand}
@@ -373,6 +357,22 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setCurrentOperation={setCurrentOperation}
 			>
 				.
+			</CalcButton>
+
+			<CalcButton
+				type={buttonType.number}
+				firstOperand={firstOperand}
+				setFirstOperand={setFirstOperand}
+				intFirst={intFirst}
+				setIntFirst={setIntFirst}
+				secondOperand={secondOperand}
+				setSecondOperand={setSecondOperand}
+				intSecond={intSecond}
+				setIntSecond={setIntSecond}
+				currentOperation={currentOperation}
+				setCurrentOperation={setCurrentOperation}
+			>
+				0
 			</CalcButton>
 
 			<CalcButton
