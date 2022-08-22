@@ -18,8 +18,7 @@ import { operation } from "./ButtonCluster"
 interface calcButtonProps {
 	children: string
 	type: buttonType
-	accent?: boolean
-	accent2?: boolean
+	accent?: number
 	firstOperand: string
 	setFirstOperand: (firstOperand: string) => void
 	intFirst: boolean
@@ -342,10 +341,12 @@ const CalcButton = (props: calcButtonProps) => {
 				shadow-lg
 				hover:shadow-xl
 				${
-					props.accent
+					props.accent === 1
 						? "bg-accent-prime text-white"
-						: props.accent2
+						: props.accent === 2
 						? "bg-accent-sec text-white"
+						: props.accent === 3
+						? "bg-accent-tert text-white"
 						: "bg-background-2"
 				}
 			`}

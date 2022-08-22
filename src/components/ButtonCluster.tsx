@@ -95,6 +95,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
+				accent={3}
 			>
 				C
 			</CalcButton>
@@ -111,6 +112,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
+				accent={1}
 			>
 				+/-
 			</CalcButton>
@@ -127,6 +129,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
+				accent={1}
 			>
 				%
 			</CalcButton>
@@ -143,7 +146,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
-				accent
+				accent={1}
 			>
 				/
 			</CalcButton>
@@ -208,7 +211,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
-				accent
+				accent={1}
 			>
 				x
 			</CalcButton>
@@ -273,7 +276,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
-				accent
+				accent={1}
 			>
 				-
 			</CalcButton>
@@ -338,7 +341,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
-				accent
+				accent={1}
 			>
 				+
 			</CalcButton>
@@ -355,6 +358,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
+				accent={3}
 			>
 				.
 			</CalcButton>
@@ -387,6 +391,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
+				accent={3}
 			>
 				del
 			</CalcButton>
@@ -403,7 +408,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				setIntSecond={setIntSecond}
 				currentOperation={currentOperation}
 				setCurrentOperation={setCurrentOperation}
-				accent2
+				accent={2}
 			>
 				=
 			</CalcButton>
