@@ -341,7 +341,7 @@ const CalcButton = (props: calcButtonProps) => {
 				landscape:lg:px-11
 				h-full
 				shadow-lg
-				hover:shadow-xl
+				hover:shadow-2xl
 				${
 					props.accent === 1
 						? "bg-accent-prime text-white"
@@ -351,6 +351,9 @@ const CalcButton = (props: calcButtonProps) => {
 						? "bg-accent-tert text-white"
 						: "bg-background-2 dark:bg-background-2-dark"
 				}
+				hover:text-background-3
+				hover:bg-background-3-dark
+				active:bg-background-2-dark
 			`}
 			onClick={() => handleClick()}
 		>
