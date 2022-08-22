@@ -24,14 +24,10 @@ interface calcButtonProps {
 	setFirstOperand: (firstOperand: string) => void
 	signPositive: boolean
 	setSignPositive: (signPositive: boolean) => void
-	pointFirst: boolean
-	setPointFirst: (pointFirst: boolean) => void
 	intFirst: boolean
 	setIntFirst: (intFirst: boolean) => void
 	secondOperand: string
 	setSecondOperand: (secondOperand: string) => void
-	pointSecond: boolean
-	setPointSecond: (pointSecond: boolean) => void
 	intSecond: boolean
 	setIntSecond: (intSecond: boolean) => void
 	currentOperation: operation
@@ -90,10 +86,6 @@ const CalcButton = (props: calcButtonProps) => {
 			props.setSecondOperand("")
 			// Set the operation to none
 			props.setCurrentOperation(operation.none)
-			// set the point first to false
-			props.setPointFirst(false)
-			// Set the point second to false
-			props.setPointSecond(false)
 			// Set the int second to true
 			props.setIntSecond(true)
 			// Check if result is an integer
@@ -145,17 +137,13 @@ const CalcButton = (props: calcButtonProps) => {
 				// If the operation is undefined and the second operand is undefined
 				if (props.currentOperation === operation.none && props.secondOperand === "") {
 					// Append the number of the button to the first operand
-					props.setFirstOperand(
-						`${props.firstOperand}${props.pointFirst ? "." : ""}${props.children}`
-					)
+					props.setFirstOperand(`${props.firstOperand}${props.children}`)
 				}
 
 				// If the first operand is defined and operation is defined
 				else if (props.firstOperand !== "" && props.currentOperation !== operation.none) {
 					// Append the number of the button to the second operand
-					props.setSecondOperand(
-						`${props.secondOperand}${props.pointSecond ? "." : ""}${props.children}`
-					)
+					props.setSecondOperand(`${props.secondOperand}${props.children}`)
 				}
 
 				break
@@ -168,6 +156,12 @@ const CalcButton = (props: calcButtonProps) => {
 					props.currentOperation === operation.none &&
 					props.secondOperand === ""
 				) {
+					// Check if last character of first operand is a point
+					if (props.firstOperand.charAt(props.firstOperand.length - 1) === ".") {
+						// Append 0 to the first operand
+						props.setFirstOperand(`${props.firstOperand}0`)
+					}
+
 					// Set the operation to the operation of the button
 					props.setCurrentOperation(getOperation() as operation)
 				}
@@ -212,18 +206,15 @@ const CalcButton = (props: calcButtonProps) => {
 
 			// If the button is a point button
 			case buttonType.point:
-				// If the first operand is undefined & operation is undefined & the second operand is undefined the point first is false & first operand is an integer
+				// If the first operand is undefined & operation is undefined & the second operand is undefined & first operand is an integer
 				if (
 					props.firstOperand === "" &&
 					props.currentOperation === operation.none &&
 					props.secondOperand === "" &&
-					!props.pointFirst &&
 					props.intFirst
 				) {
-					// Set the first operand to 0
-					props.setFirstOperand("0")
-					// Set the point first to true
-					props.setPointFirst(true)
+					// Set the first operand to 0.
+					props.setFirstOperand("0.")
 					// Set the int first to false
 					props.setIntFirst(false)
 				}
@@ -233,41 +224,36 @@ const CalcButton = (props: calcButtonProps) => {
 					props.firstOperand !== "" &&
 					props.currentOperation === operation.none &&
 					props.secondOperand === "" &&
-					!props.pointFirst &&
 					props.intFirst
 				) {
-					// Set the point first to true
-					props.setPointFirst(true)
+					// Append the point to the first operand
+					props.setFirstOperand(`${props.firstOperand}.`)
 					// Set the int first to false
 					props.setIntFirst(false)
 				}
 
-				// If the first operand is defined & operation is defined & the second operand is undefined & the point second is false & the second operand is an integer
+				// If the first operand is defined & operation is defined & the second operand is undefined & the second operand is an integer
 				else if (
 					props.firstOperand !== "" &&
 					props.currentOperation !== operation.none &&
 					props.secondOperand === "" &&
-					!props.pointSecond &&
 					props.intSecond
 				) {
-					// Set the second operand to 0
-					props.setSecondOperand("0")
-					// Set the point second to true
-					props.setPointSecond(true)
+					// Set the second operand to 0.
+					props.setSecondOperand("0.")
 					// Set the int first to false
 					props.setIntSecond(false)
 				}
 
-				// If the first operand is defined & operation is defined & the second operand is defined & the point second is false & the second operand is an integer
+				// If the first operand is defined & operation is defined & the second operand is defined & the second operand is an integer
 				else if (
 					props.firstOperand !== "" &&
 					props.currentOperation !== operation.none &&
 					props.secondOperand !== "" &&
-					!props.pointSecond &&
 					props.intSecond
 				) {
-					// Set the point second to true
-					props.setPointSecond(true)
+					// Append the point to the second operand
+					props.setSecondOperand(`${props.secondOperand}.`)
 					// Set the int first to false
 					props.setIntSecond(false)
 				}
@@ -307,6 +293,12 @@ const CalcButton = (props: calcButtonProps) => {
 
 			// If the button is an equals button
 			case buttonType.equals:
+				// Check if last character of the second operand is a point
+				if (props.secondOperand.charAt(props.secondOperand.length - 1) === ".") {
+					// Append a 0 to the second operand
+					props.setSecondOperand(`${props.secondOperand}0`)
+				}
+				
 				// Set the first operand to the result of the operation
 				calculate()
 				break
