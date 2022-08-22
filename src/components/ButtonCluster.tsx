@@ -78,6 +78,7 @@ const ButtonCluster = (props: ButtonClusterProps) => {
 				gap-4
 				p-4
 				bg-background-3
+				dark:bg-background-3-dark
 				rounded-t-3xl
 				landscape:rounded-3xl
 				landscape:m-4

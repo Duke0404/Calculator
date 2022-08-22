@@ -336,7 +336,7 @@ const CalcButton = (props: calcButtonProps) => {
 				portrait:md:py-16
 				landscape:px-2
 				landscape:sm:px-5
-				landscape:lg:px-16
+				landscape:lg:px-11
 				h-full
 				shadow-lg
 				hover:shadow-xl
@@ -347,7 +347,7 @@ const CalcButton = (props: calcButtonProps) => {
 						? "bg-accent-sec text-white"
 						: props.accent === 3
 						? "bg-accent-tert text-white"
-						: "bg-background-2"
+						: "bg-background-2 dark:bg-background-2-dark"
 				}
 			`}
 			onClick={() => handleClick()}
