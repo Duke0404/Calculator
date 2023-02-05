@@ -2,17 +2,20 @@ import { useState, useEffect } from "react"
 
 import { HiBackspace } from "react-icons/hi"
 import { BsDot } from "react-icons/bs"
-import { RiCloseFill, RiDivideFill, RiAddFill, RiSubtractFill } from "react-icons/ri"
+import { RiCloseFill, RiDivideFill, RiAddFill, RiSubtractFill, RiHistoryFill } from "react-icons/ri"
 import { TbEqual } from "react-icons/tb"
 
-import Display from "./display"
+import Display from "./components/display"
 import useKeyPress, { keyType } from "./hooks/useKeyPress"
+import HistoryPane from "./components/historyPane"
 
 export default function App() {
 	const [equation, setEquation] = useState("")
 	const [history, setHistory] = useState<string[]>([])
+	const [showHistory, setShowHistory] = useState(false)
 
 	function clear() {
+		setHistory(current => [...current, ""])
 		setEquation("")
 	}
 
@@ -22,6 +25,11 @@ export default function App() {
 
 	function backspace() {
 		setEquation(current => current.slice(0, -1))
+	}
+
+	function equals() {
+		setHistory(current => [...current.filter(elem => elem !== ""), equation])
+		setEquation(calculate())
 	}
 
 	function addPoint() {
@@ -90,8 +98,7 @@ export default function App() {
 		if (zeroKey) append("0")
 		if (backspaceKey) backspace()
 		if (equalKey) {
-			setHistory(current => [...current, equation])
-			setEquation(calculate())
+			equals()
 		}
 	}
 
@@ -117,23 +124,63 @@ export default function App() {
 		equalKey
 	])
 
+	const getLastEquation = () => (history.length > 0 ? history[history.length - 1] : "")
+
+	useEffect(() => {
+		if (history.length > 0)
+			localStorage.setItem("history", JSON.stringify(history.concat([""])))
+	}, [history])
+
+	useEffect(() => {
+		setHistory(JSON.parse(localStorage.getItem("history") || "[]"))
+	}, [])
+
+	function flipHistoryPanel() {
+		setShowHistory(current => !current)
+	}
+
+	function closeHistoryPanel() {
+		setShowHistory(false)
+	}
+
+	function pushEmptyHistory() {
+		setHistory(current => [...current, ""])
+	}
+
 	const buttonStyle =
-		"flex items-center justify-center rounded-2xl text-2xl py-2  h-full shadow-lg hover:shadow-3xl dark:text-white"
+		"flex items-center justify-center rounded-2xl text-2xl py-2 h-full shadow-lg hover:shadow-3xl dark:text-white"
 
 	return (
 		<>
-			<Display value={equation} />
+			{showHistory && (
+				<HistoryPane
+					history={history.filter(elem => elem !== "")}
+					closeHistoryPanel={closeHistoryPanel}
+					setEquation={setEquation}
+					pushEmptyHistory={pushEmptyHistory}
+				/>
+			)}
 
-			{/* <input
-				type="text"
+			<nav className="flex items-center justify-between w-full">
+				<h1 className="text-3xl dark:text-white px-2">Calculator</h1>
+
+				<button
+					onClick={flipHistoryPanel}
+					className="flex items-center justify-center rounded-2xl text-2xl py-3 w-20 shadow-lg hover:shadow-3xl dark:text-white bg-slate-100 dark:bg-zinc-900"
+				>
+					<RiHistoryFill />
+				</button>
+			</nav>
+
+			<Display
 				value={equation}
-				onChange={e => setEquation(e.target.value)}
-			/> */}
+				lastEq={getLastEquation()}
+			/>
 
 			<div
 				className="grid grid-rows-5 grid-cols-4 items-center
 				justify-center
-				gap-4
+				gap-2
 				w-full"
 			>
 				<button
@@ -243,10 +290,7 @@ export default function App() {
 					<HiBackspace className="mr-px" />
 				</button>
 				<button
-					onClick={() => {
-						setHistory(current => [...current, equation])
-						setEquation(current => calculate(current))
-					}}
+					onClick={equals}
 					className={buttonStyle + " bg-indigo-700 text-white"}
 				>
 					<TbEqual />
