@@ -5,6 +5,7 @@ import viteTsConfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig({
 	cacheDir: "./node_modules/.vite/calculator",
+	base: "/Calculator/",
 
 	server: {
 		port: 4200,
