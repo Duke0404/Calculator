@@ -1,13 +1,13 @@
 {
 	"name": "calculator",
 	"version": "2.0.0",
-	"homepage": "/",
+	"homepage": ".",
 	"license": "GPL-3.0",
 	"type": "module",
 	"scripts": {
 		"start": "nx serve",
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build",
+		"deploy": "gh-pages -d dist/calculator",
 		"build": "nx build",
 		"test": "nx test"
 	},
@@ -54,6 +54,7 @@
 	},
 	"dependencies": {
 		"react": "18.2.0",
-		"react-dom": "18.2.0"
+		"react-dom": "18.2.0",
+		"react-icons": "^4.7.1"
 	}
 }

@@ -1,5 +1,12 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+import { HiBackspace } from "react-icons/hi"
+import { BsDot } from "react-icons/bs"
+import { RiCloseFill, RiDivideFill, RiAddFill, RiSubtractFill } from "react-icons/ri"
+import { TbEqual } from "react-icons/tb"
+
 import Display from "./display"
+import useKeyPress, { keyType } from "./hooks/useKeyPress"
 
 export default function App() {
 	const [equation, setEquation] = useState("")
@@ -47,6 +54,69 @@ export default function App() {
 		} else return ""
 	}
 
+	const divideKey = useKeyPress(keyType.divide)
+	const sevenKey = useKeyPress(keyType.seven)
+	const eightKey = useKeyPress(keyType.eight)
+	const nineKey = useKeyPress(keyType.nine)
+	const multiplyKey = useKeyPress(keyType.multiply)
+	const fourKey = useKeyPress(keyType.four)
+	const fiveKey = useKeyPress(keyType.five)
+	const sixKey = useKeyPress(keyType.six)
+	const subtractKey = useKeyPress(keyType.subtract)
+	const oneKey = useKeyPress(keyType.one)
+	const twoKey = useKeyPress(keyType.two)
+	const threeKey = useKeyPress(keyType.three)
+	const addKey = useKeyPress(keyType.add)
+	const pointKey = useKeyPress(keyType.point)
+	const zeroKey = useKeyPress(keyType.zero)
+	const backspaceKey = useKeyPress(keyType.backspace)
+	const equalKey = useKeyPress(keyType.equals) || useKeyPress(keyType.enter)
+
+	function handleKeyPress() {
+		if (divideKey) append("/")
+		if (sevenKey) append("7")
+		if (eightKey) append("8")
+		if (nineKey) append("9")
+		if (multiplyKey) append("*")
+		if (fourKey) append("4")
+		if (fiveKey) append("5")
+		if (sixKey) append("6")
+		if (subtractKey) append("-")
+		if (oneKey) append("1")
+		if (twoKey) append("2")
+		if (threeKey) append("3")
+		if (addKey) append("+")
+		if (pointKey) addPoint()
+		if (zeroKey) append("0")
+		if (backspaceKey) backspace()
+		if (equalKey) {
+			setHistory(current => [...current, equation])
+			setEquation(calculate())
+		}
+	}
+
+	useEffect(() => {
+		handleKeyPress()
+	}, [
+		divideKey,
+		sevenKey,
+		eightKey,
+		nineKey,
+		multiplyKey,
+		fourKey,
+		fiveKey,
+		sixKey,
+		subtractKey,
+		oneKey,
+		twoKey,
+		threeKey,
+		addKey,
+		pointKey,
+		zeroKey,
+		backspaceKey,
+		equalKey
+	])
+
 	const buttonStyle =
 		"flex items-center justify-center rounded-2xl text-2xl py-2  h-full shadow-lg hover:shadow-3xl dark:text-white"
 
@@ -70,13 +140,13 @@ export default function App() {
 					onClick={clear}
 					className={buttonStyle + " col-span-3 bg-blue-400 text-white"}
 				>
-					AC
+					Clear
 				</button>
 				<button
 					onClick={() => append("/")}
 					className={buttonStyle + " bg-pink-500 text-white"}
 				>
-					/
+					<RiDivideFill />
 				</button>
 
 				<button
@@ -101,7 +171,7 @@ export default function App() {
 					onClick={() => append("*")}
 					className={buttonStyle + " bg-pink-500 text-white"}
 				>
-					*
+					<RiCloseFill />
 				</button>
 
 				<button
@@ -126,7 +196,7 @@ export default function App() {
 					onClick={() => append("-")}
 					className={buttonStyle + " bg-pink-500 text-white"}
 				>
-					-
+					<RiSubtractFill />
 				</button>
 
 				<button
@@ -151,10 +221,15 @@ export default function App() {
 					onClick={() => append("+")}
 					className={buttonStyle + " bg-pink-500 text-white"}
 				>
-					+
+					<RiAddFill />
 				</button>
 
-				<button onClick={addPoint} className={buttonStyle + " bg-blue-400 text-white"}>.</button>
+				<button
+					onClick={addPoint}
+					className={buttonStyle + " bg-blue-400 text-white"}
+				>
+					<BsDot />
+				</button>
 				<button
 					onClick={() => append("0")}
 					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
@@ -165,7 +240,7 @@ export default function App() {
 					onClick={backspace}
 					className={buttonStyle + " bg-blue-400 text-white"}
 				>
-					C
+					<HiBackspace className="mr-px" />
 				</button>
 				<button
 					onClick={() => {
@@ -174,7 +249,7 @@ export default function App() {
 					}}
 					className={buttonStyle + " bg-indigo-700 text-white"}
 				>
-					=
+					<TbEqual />
 				</button>
 			</div>
 		</>
