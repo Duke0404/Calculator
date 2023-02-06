@@ -2,7 +2,16 @@ import { useState, useEffect } from "react"
 
 import { HiBackspace } from "react-icons/hi"
 import { BsDot } from "react-icons/bs"
-import { RiCloseFill, RiDivideFill, RiAddFill, RiSubtractFill, RiHistoryFill } from "react-icons/ri"
+import {
+	RiCloseFill,
+	RiDivideFill,
+	RiAddFill,
+	RiSubtractFill,
+	RiParenthesesFill,
+	RiArrowUpSLine,
+	RiPercentFill,
+	RiHistoryFill
+} from "react-icons/ri"
 import { TbEqual } from "react-icons/tb"
 
 import Display from "./components/display"
@@ -39,6 +48,12 @@ export default function App() {
 		else setEquation(current => current + "0.")
 	}
 
+	// function addPercent() {
+	// 	if (equation.length === 0) return
+	// 	else if (testNumber(equation[equation.length - 1])) append("%")
+	// 	else return
+	// }
+
 	const testNumber = (number: string) => RegExp(/^-?\d+\.?\d*$/).test(number)
 	const splitLastOccurrence = (input: string, substring: string) => [
 		input.slice(0, input.lastIndexOf(substring)),
@@ -46,6 +61,9 @@ export default function App() {
 	]
 
 	function calculate(input = equation): string {
+		// if (input.includes("%")) input.replace("%", "/100*")
+		// if (RegExp(/^[\+\-\*\/\^%]$/).test(input[input.length - 1])) input = input.slice(0, -1)
+
 		if (testNumber(input)) return input
 		else if (input.includes("+")) {
 			const [a, b] = splitLastOccurrence(input, "+")
@@ -59,6 +77,13 @@ export default function App() {
 		} else if (input.includes("/")) {
 			const [a, b] = splitLastOccurrence(input, "/")
 			return (+calculate(a) / +calculate(b)).toString()
+		} else if (input.includes("^")) {
+			const [a, b] = splitLastOccurrence(input, "^")
+			return Math.pow(+calculate(a), +calculate(b)).toString()
+		} else if (input.includes("(")) {
+			const [a, b] = splitLastOccurrence(input, "(")
+			const [c, d] = b.split(/\)(.*)/s)
+			return calculate(a + calculate(c) + d)
 		} else return ""
 	}
 
@@ -152,17 +177,8 @@ export default function App() {
 
 	return (
 		<>
-			{showHistory && (
-				<HistoryPane
-					history={history.filter(elem => elem !== "")}
-					closeHistoryPanel={closeHistoryPanel}
-					setEquation={setEquation}
-					pushEmptyHistory={pushEmptyHistory}
-				/>
-			)}
-
 			<nav className="flex items-center justify-between w-full">
-				<h1 className="text-3xl dark:text-white px-2">Calculator</h1>
+				<h1 className="text-3xl font-semibold dark:text-white px-2">Calculator</h1>
 
 				<button
 					onClick={flipHistoryPanel}
@@ -172,130 +188,155 @@ export default function App() {
 				</button>
 			</nav>
 
-			<Display
-				value={equation}
-				lastEq={getLastEquation()}
-			/>
+			{showHistory ? (
+				<HistoryPane
+					history={history.filter(elem => elem !== "").reverse()}
+					closeHistoryPanel={closeHistoryPanel}
+					setEquation={setEquation}
+					pushEmptyHistory={pushEmptyHistory}
+				/>
+			) : (
+				<>
+					<Display
+						value={equation}
+						lastEq={getLastEquation()}
+					/>
 
-			<div
-				className="grid grid-rows-5 grid-cols-4 items-center
+					<div
+						className="grid grid-rows-5 grid-cols-4 items-center
 				justify-center
 				gap-2
 				w-full"
-			>
-				<button
-					onClick={clear}
-					className={buttonStyle + " col-span-3 bg-blue-400 text-white"}
-				>
-					Clear
-				</button>
-				<button
-					onClick={() => append("/")}
-					className={buttonStyle + " bg-pink-500 text-white"}
-				>
-					<RiDivideFill />
-				</button>
+					>
+						<button
+							onClick={clear}
+							className={buttonStyle + " col-span-3 bg-blue-400 text-white"}
+						>
+							Clear
+						</button>
 
-				<button
-					onClick={() => append("7")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					7
-				</button>
-				<button
-					onClick={() => append("8")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					8
-				</button>
-				<button
-					onClick={() => append("9")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					9
-				</button>
-				<button
-					onClick={() => append("*")}
-					className={buttonStyle + " bg-pink-500 text-white"}
-				>
-					<RiCloseFill />
-				</button>
+						{/* <button className={buttonStyle + " bg-pink-500 text-white"}>
+							<RiParenthesesFill />
+						</button>
+						<button className={buttonStyle + " bg-pink-500 text-white"}>
+							<RiArrowUpSLine />
+						</button>
+						<button
+							onClick={addPercent}
+							className={buttonStyle + " bg-pink-500 text-white"}
+						>
+							<RiPercentFill />
+						</button> */}
 
-				<button
-					onClick={() => append("4")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					4
-				</button>
-				<button
-					onClick={() => append("5")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					5
-				</button>
-				<button
-					onClick={() => append("6")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					6
-				</button>
-				<button
-					onClick={() => append("-")}
-					className={buttonStyle + " bg-pink-500 text-white"}
-				>
-					<RiSubtractFill />
-				</button>
+						<button
+							onClick={() => append("/")}
+							className={buttonStyle + " bg-pink-500 text-white"}
+						>
+							<RiDivideFill />
+						</button>
 
-				<button
-					onClick={() => append("1")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					1
-				</button>
-				<button
-					onClick={() => append("2")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					2
-				</button>
-				<button
-					onClick={() => append("3")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					3
-				</button>
-				<button
-					onClick={() => append("+")}
-					className={buttonStyle + " bg-pink-500 text-white"}
-				>
-					<RiAddFill />
-				</button>
+						<button
+							onClick={() => append("7")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							7
+						</button>
+						<button
+							onClick={() => append("8")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							8
+						</button>
+						<button
+							onClick={() => append("9")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							9
+						</button>
+						<button
+							onClick={() => append("*")}
+							className={buttonStyle + " bg-pink-500 text-white"}
+						>
+							<RiCloseFill />
+						</button>
 
-				<button
-					onClick={addPoint}
-					className={buttonStyle + " bg-blue-400 text-white"}
-				>
-					<BsDot />
-				</button>
-				<button
-					onClick={() => append("0")}
-					className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
-				>
-					0
-				</button>
-				<button
-					onClick={backspace}
-					className={buttonStyle + " bg-blue-400 text-white"}
-				>
-					<HiBackspace className="mr-px" />
-				</button>
-				<button
-					onClick={equals}
-					className={buttonStyle + " bg-indigo-700 text-white"}
-				>
-					<TbEqual />
-				</button>
-			</div>
+						<button
+							onClick={() => append("4")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							4
+						</button>
+						<button
+							onClick={() => append("5")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							5
+						</button>
+						<button
+							onClick={() => append("6")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							6
+						</button>
+						<button
+							onClick={() => append("-")}
+							className={buttonStyle + " bg-pink-500 text-white"}
+						>
+							<RiSubtractFill />
+						</button>
+
+						<button
+							onClick={() => append("1")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							1
+						</button>
+						<button
+							onClick={() => append("2")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							2
+						</button>
+						<button
+							onClick={() => append("3")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							3
+						</button>
+						<button
+							onClick={() => append("+")}
+							className={buttonStyle + " bg-pink-500 text-white"}
+						>
+							<RiAddFill />
+						</button>
+
+						<button
+							onClick={addPoint}
+							className={buttonStyle + " bg-blue-400 text-white"}
+						>
+							<BsDot />
+						</button>
+						<button
+							onClick={() => append("0")}
+							className={buttonStyle + " bg-slate-100 dark:bg-zinc-900"}
+						>
+							0
+						</button>
+						<button
+							onClick={backspace}
+							className={buttonStyle + " bg-blue-400 text-white"}
+						>
+							<HiBackspace className="mr-px" />
+						</button>
+						<button
+							onClick={equals}
+							className={buttonStyle + " bg-indigo-700 text-white"}
+						>
+							<TbEqual />
+						</button>
+					</div>
+				</>
+			)}
 		</>
 	)
 }
